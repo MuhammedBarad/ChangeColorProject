@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import AppNavbar from "./AppNavbar";
+import ColorBox from "./ColorBox";
+import { Container } from "react-bootstrap";
+import TestBox from "./TestBox";
+import "./colorbox.css";
 
-function App() {
+const App = () => {
+  const [NewColor, serNewColor] = useState();
+  useEffect(() => {
+    serNewColor("red");
+  }, []);
+  const changeColor = (e) => {
+    serNewColor(e.target.value);
+    console.log(NewColor);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Container>
+        <AppNavbar newColor={NewColor}/>
+        <ColorBox NewColor={NewColor} />
+        <TestBox changeColor={changeColor} />
+        <AppNavbar newColor={NewColor} />
+      </Container>
+    </>
   );
-}
+};
 
 export default App;
